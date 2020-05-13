@@ -1,38 +1,40 @@
-<h1>Cats!</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-sm"></div>
+    <div class="col-sm mt-4">
+      <h2 class="text-center">Eat-Da-Burger</h2>
+      <img class="rounded mx-auto d-block" src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/688c04dc-f103-4fec-b5a9-63eb1fa48dff/dboo5ej-a5105d94-2267-42ad-86aa-2cf1500cb1c6.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3sicGF0aCI6IlwvZlwvNjg4YzA0ZGMtZjEwMy00ZmVjLWI1YTktNjNlYjFmYTQ4ZGZmXC9kYm9vNWVqLWE1MTA1ZDk0LTIyNjctNDJhZC04NmFhLTJjZjE1MDBjYjFjNi5wbmcifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdfQ.HY4JUw2s1f_qgDsWFc4vpgk8gVBAph2AG6IsynmL3_o" alt="burger" width="300" height="auto">
 
-<h2>Cats that are not sleepy!</h2>
+      <div class="row">
+        <div class="col-sm">
+          {{#each burgers}}
+            {{#unless this.devoured}}
+              {{this.id}}. {{this.burger_name}}
+              <form class="devour-form">
+                <input input type="hidden" class="burger_id" type="text" value={{this.id}}><br>
+                <button type="submit" style="font-size: 15px; width: 100px; height: 50px" class="btn btn-default">Devour</button>
+              </form>
+            {{/unless}}
+          {{/each}}
+        </div>
+        <div class="col-sm">
+          Devoured:<hr>
+          {{#each burgers}}
+			  	{{#if this.devoured}}
+            {{this.id}}. {{this.burger_name}}<br>
+  				{{/if}}
+  			  {{/each}}
+        </div>
+      </div>
 
-<ul>
-  {{#each cats}}
-    {{#unless sleepy}}
-      {{> cats/cat-block sleep=true}}
-    {{/unless}}
-  {{/each}}
-</ul>
-
-<h2>Cats that are sleepy!</h2>
-
-<ul>
-  {{#each cats}}
-    {{#if sleepy}}
-      {{> cats/cat-block sleep=false}}
-    {{/if}}
-  {{/each}}
-</ul>
-
-<h2>Add a Cat</h2>
-<form class="create-form">
-
-  <div class="form-group">
-    <label for="ca">Cat Name:</label>
-    <input type="text" id="ca" name="name">
+      <form action="/burgers/create" method="POST">
+        <div class="text-center">
+            Enter the burger name
+            <input type="text" name="burger_name">
+            <button type="submit" class="mt-4 btn btn-primary">Add burger</button>
+        </div>
+      </form>
+    </div>
+    <div class="col-sm"></div>
   </div>
-
-  <div class="form-group">
-    <label for="sleepy">Sleepy?</label><br>
-    <input type="radio" name="sleepy" value="1" checked> Sleepy!<br>
-    <input type="radio" name="sleepy" value="0"> Awake
-  </div>
-
-  <button type="submit">Add Cat</button>
-</form>
+</div>
